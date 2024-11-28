@@ -4,6 +4,7 @@ import seaborn as sn
 import numpy as np
 import os
 import re
+from utils import dataC,barplot
 
 
 data = pd.read_csv("products.csv")
@@ -19,4 +20,5 @@ data["our_price"] = data["our_price"].apply(lambda x: float(re.findall("[0-9].*"
 data = data.drop(["date","nan"], axis = 1)
 
 
-print(data.iloc[0])
+barplot(data)
+
