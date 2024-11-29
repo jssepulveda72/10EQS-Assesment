@@ -16,21 +16,30 @@ dataC = dataC.drop(columns = [f"price{i}" for i in range(1,5)])
 
 
 def barplot(data):
-    plt.figure(figsize=(16,6))
-    bar_colors = ["cyan","magenta","orange"]
-    x = 0
-    width =0.25
-    mutiplier = 0
+    plt.figure(figsize=(20,8), layout = "constrained")
+    bar_colors = ["blue","green","orange"]
+    x = np.arange(len(data.index))
+    width = 0.25
+    
+    
     for i in range(len(data.index)):
-        offset = width*3*mutiplier
-        plt.bar(x = [x + offset,
-                     x + 2*offset,
-                     x + 3* offset], 
+        
+        bars = plt.bar(x = [x[i] + width,
+                     x[i] + 2*width,
+                     x[i] + 3*width], 
                 height = [dataC["Max"][i],
                           dataC["Average"][i],
                           data["our_price"][i]],
                 color = bar_colors,
-                label = ["Max","Average","Our"],
-                width = [0.5,0.5,0.5])
+                #label = ["Max","Average","Our"],
+                width = width)
         
-        plt.xticks(x+2*offset,data.index[i])
+        plt.bar_label(bars, padding=3,rotation=0)
+        
+        
+    plt.xticks(x,data.index,rotation = 15,minor = False)
+    plt.legend(bars,["Max","Average","Our"],
+               ncols = 3,
+               loc = "upper left",
+               fontsize = 15)
+    plt.title("Price comparative", fontsize = 15)
