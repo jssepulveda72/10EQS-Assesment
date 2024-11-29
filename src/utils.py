@@ -16,11 +16,21 @@ dataC = dataC.drop(columns = [f"price{i}" for i in range(1,5)])
 
 
 def barplot(data):
-    
-    
+    plt.figure(figsize=(16,6))
+    bar_colors = ["cyan","magenta","orange"]
+    x = 0
+    width =0.25
+    mutiplier = 0
     for i in range(len(data.index)):
-        plt.figure(figsize=(16,6))
-        plt.bar(x = range(3), 
+        offset = width*3*mutiplier
+        plt.bar(x = [x + offset,
+                     x + 2*offset,
+                     x + 3* offset], 
                 height = [dataC["Max"][i],
-                          dataC["Min"][i],
-                          data["our_price"][i]])
+                          dataC["Average"][i],
+                          data["our_price"][i]],
+                color = bar_colors,
+                label = ["Max","Average","Our"],
+                width = [0.5,0.5,0.5])
+        
+        plt.xticks(x+2*offset,data.index[i])
