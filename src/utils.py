@@ -43,3 +43,4 @@ def barplot(data):
                loc = "upper left",
                fontsize = 15)
     plt.title("Price comparative", fontsize = 15)
+    plt.savefig("Price comparision.png",dpi = 1200)
